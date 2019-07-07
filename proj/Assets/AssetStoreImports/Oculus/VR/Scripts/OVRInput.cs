@@ -491,17 +491,20 @@ public static class OVRInput
 		{
 			case Controller.LTouch:
 			case Controller.LTrackedRemote:
-				if (OVRManager.loadedXRDevice == OVRManager.XRDevice.Oculus)
-					return OVRPlugin.GetNodePose(OVRPlugin.Node.HandLeft, stepType).ToOVRPose().position;
-				else if (OVRManager.loadedXRDevice == OVRManager.XRDevice.OpenVR)
-					return openVRControllerDetails[0].localPosition;
-				else
-				{
-					Vector3 retVec;
-					if (OVRNodeStateProperties.GetNodeStatePropertyVector3(Node.LeftHand, NodeStatePropertyType.Position, OVRPlugin.Node.HandLeft, stepType, out retVec))
-						return retVec;
-					return Vector3.zero;				//Will never be hit, but is a final fallback.
-				}
+                if (OVRManager.loadedXRDevice == OVRManager.XRDevice.Oculus)
+                {
+                    Debug.Log(OVRPlugin.GetNodePose(OVRPlugin.Node.HandLeft, stepType).ToOVRPose().position);
+                    return OVRPlugin.GetNodePose(OVRPlugin.Node.HandLeft, stepType).ToOVRPose().position;
+                }
+                else if (OVRManager.loadedXRDevice == OVRManager.XRDevice.OpenVR)
+                    return openVRControllerDetails[0].localPosition;
+                else
+                {
+                    Vector3 retVec;
+                    if (OVRNodeStateProperties.GetNodeStatePropertyVector3(Node.LeftHand, NodeStatePropertyType.Position, OVRPlugin.Node.HandLeft, stepType, out retVec))
+                        return retVec;
+                    return Vector3.zero;                //Will never be hit, but is a final fallback.
+                }
 			case Controller.RTouch:
 			case Controller.RTrackedRemote:
 				if (OVRManager.loadedXRDevice == OVRManager.XRDevice.Oculus)

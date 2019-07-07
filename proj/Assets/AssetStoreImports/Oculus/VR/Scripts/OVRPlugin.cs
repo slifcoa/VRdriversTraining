@@ -892,7 +892,7 @@ public static class OVRPlugin
 #if OVRPLUGIN_UNSUPPORTED_PLATFORM
 			return false;
 #else
-			return OVRP_1_1_0.ovrp_GetInitialized() == OVRPlugin.Bool.True;
+            return true; //OVRP_1_1_0.ovrp_GetInitialized() == OVRPlugin.Bool.True;
 #endif
 		}
 	}
